@@ -78,92 +78,7 @@ public class ApiTest {
             System.out.println(response.getStatusLine().getStatusCode());
         }
     }
-    @Test
-    public void findAndCommentOnMentionedTalks() throws IOException {
-        // 1. 创建 HTTP 客户端
-        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-
-        // 2. 发起 GET 请求以获取话题列表
-        HttpGet get = new HttpGet("https://api.zsxq.com/v2/groups/88888248222552/topics?scope=all&count=20");
-        get.addHeader("cookie", COOKIE);
-        get.addHeader("Content-Type", "application/json;charset=utf8");
-
-        CloseableHttpResponse response = httpClient.execute(get);
-        String res = EntityUtils.toString(response.getEntity());
-
-        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-            System.out.println("Response JSON: " + res);
-
-            // 3. 解析响应数据
-            JSONObject jsonResponse = JSONObject.parseObject(res);
-            JSONObject respData = jsonResponse.getJSONObject("resp_data");
-            JSONArray topics = respData.getJSONArray("topics");
-
-            if (topics != null && !topics.isEmpty()) {
-                for (int i = 0; i < topics.size(); i++) {
-                    JSONObject topic = topics.getJSONObject(i);
-                    JSONObject talk = topic.getJSONObject("talk");
-                    String text = talk.getString("text");
-                    String topicId = topic.getString("topic_id");
-
-                    // 4. 检查文本中是否有 @ 用户A 的内容
-                    if (text != null && text.contains("<e type=\"mention\" uid=\"415544512228128\"")) {
-                        // 找到被@的用户ID
-                        String mentionedUid = extractMentionedUserId(text);
-
-                        // 5. 发出评论
-                        if (mentionedUid != null) {
-                            postComment(httpClient, topicId, mentionedUid);
-                        }
-                    }
-                }
-            }
-        } else {
-            System.out.println("Failed to fetch topics: " + response.getStatusLine().getStatusCode());
-        }
-
-        httpClient.close();
-    }
-
-    // 从文本中提取被@的用户ID
-    private String extractMentionedUserId(String text) {
-        String mentionTagStart = "<e type=\"mention\" uid=\"";
-        int startIndex = text.indexOf(mentionTagStart);
-        if (startIndex != -1) {
-            int uidStart = startIndex + mentionTagStart.length();
-            int uidEnd = text.indexOf("\"", uidStart);
-            if (uidEnd != -1) {
-                return text.substring(uidStart, uidEnd);
-            }
-        }
-        return null;
-    }
-
-    // 发出评论
-    private void postComment(CloseableHttpClient httpClient, String topicId, String mentionedUserId) throws IOException {
-        HttpPost post = new HttpPost("https://api.zsxq.com/v2/groups/88888248222552/topics/" + topicId + "/comments");
-        post.addHeader("cookie", COOKIE);
-        post.addHeader("Content-Type", "application/json;charset=utf8");
-
-        String commentJson = "{\n" +
-                "  \"req_data\": {\n" +
-                "    \"text\": \"感谢@您，我来解答：...\",\n" +
-                "    \"image_ids\": [],\n" +
-                "    \"mentioned_user_ids\": [\"" + mentionedUserId + "\"]\n" +
-                "  }\n" +
-                "}";
-
-        StringEntity stringEntity = new StringEntity(commentJson, ContentType.create("application/json", "UTF-8"));
-        post.setEntity(stringEntity);
-
-        CloseableHttpResponse response = httpClient.execute(post);
-        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-            String res = EntityUtils.toString(response.getEntity());
-            System.out.println("Comment Response: " + res);
-        } else {
-            System.out.println("Failed to post comment: " + response.getStatusLine().getStatusCode());
-        }
-    }
+}
 
 
 //    private void postComment(CloseableHttpClient httpClient, String topicId, String talkId, String mentionedUserId, String commentText) throws IOException {
@@ -211,4 +126,4 @@ public class ApiTest {
 //
 //    }
 
-}
+
