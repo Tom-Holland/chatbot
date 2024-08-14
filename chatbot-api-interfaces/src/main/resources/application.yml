@@ -1,6 +1,9 @@
 server:
   port: 8090
 
+chatbot-api:
+  groupId: 88888248222552
+  cookie: tfstk=fb_eogaf-yUFBxyIcp8y0pC53K8pyEebLa9WZ_fkOpvnR4saq_fHO32pRaWNHsIQw3Y3aTWcL36PwWdkETXyFMZ_l6CpyU2jzraf9wS08I6E-LcgZIR-t64vzOfpyU21nJ9XA6BjM1fDUUVwSQArxUAHr5-MGd0HZ2AoI5RJzVCKD8lHb-fDINTyeSPQahpZrqlvTHx4kd0oaNAF_Kf3m40l7B-hzPUcjM-CqsKARTUrWe1VjFAPySmyUnSlRFb3Irx9qgjX4GM3OtXPsTLCS7mHnM6BSwjqZ4fw8MxJThkUQKbdsZLMfrVVsNBC9N5SZzA1hdfd-Uz0Me8HKFSydYdGKQ_RYYmyxCdwh5PwacEDLX-KGrn-2HI9_KNL90nJxCdwh5PZ20KpWCJb9WC..; zsxq_access_token=41F5AD64-A101-2818-D0AE-D59C1291D520_2434DE71EB4E1E1B; abtest_env=product; zsxqsessionid=786a909b08b4e165a202a7f587227e14; sensorsdata2015jssdkcross=%7B%22distinct_id%22%3A%22415544512228128%22%2C%22first_id%22%3A%2218e4f6f519c4c3-06830e1deb59f8-4c657b58-1327104-18e4f6f519dd0b%22%2C%22props%22%3A%7B%22%24latest_traffic_source_type%22%3A%22%E5%BC%95%E8%8D%90%E6%B5%81%E9%87%8F%22%2C%22%24latest_search_keyword%22%3A%22%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC%22%2C%22%24latest_referrer%22%3A%22https%3A%2F%2Fwww.yuque.com%2F%22%7D%2C%22identities%22%3A%22eyIkaWRlbnRpdHlfY29va2llX2lkIjoiMThlNGY2ZjUxOWM0YzMtMDY4MzBlMWRlYjU5ZjgtNGM2NTdiNTgtMTMyNzEwNC0xOGU0ZjZmNTE5ZGQwYiIsIiRpZGVudGl0eV9sb2dpbl9pZCI6IjQxNTU0NDUxMjIyODEyOCJ9%22%2C%22history_login_id%22%3A%7B%22name%22%3A%22%24identity_login_id%22%2C%22value%22%3A%22415544512228128%22%7D%2C%22%24device_id%22%3A%2218e4f6f519c4c3-06830e1deb59f8-4c657b58-1327104-18e4f6f519dd0b%22%7D
 # 分组任务配置
 #chatbot-api:
 #  launchList: group01,group02 # 启动几组，就配置几组
