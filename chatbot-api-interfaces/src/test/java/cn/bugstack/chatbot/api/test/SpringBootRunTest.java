@@ -1,6 +1,6 @@
 package cn.bugstack.chatbot.api.test;
 
-//import cn.bugstack.chatbot.api.domain.ai.IOpenAI;
+import cn.bugstack.chatbot.api.domain.ai.IOpenAI;
 import cn.bugstack.chatbot.api.domain.zsxq.IZsxqApi;
 import cn.bugstack.chatbot.api.domain.zsxq.model.aggregates.UnAnsweredQuestionsAggregates;
 import cn.bugstack.chatbot.api.domain.zsxq.model.vo.Topics;
@@ -34,12 +34,13 @@ public class SpringBootRunTest {
     @Value("${chatbot-api.cookie}")
     private String cookie;
 //    @Value("${chatbot-api.group01.openAiKey}")
-//    private String openAiKey;
+    @Value("${chatbot-api.openAiKey}")
+    private String openAiKey;
 
     @Resource
     private IZsxqApi zsxqApi;
-//    @Resource
-//    private IOpenAI openAI;
+    @Resource
+    private IOpenAI openAI;
 
     @Test
     public void test_zsxqApi() throws IOException {
@@ -54,17 +55,16 @@ public class SpringBootRunTest {
             // 回答@某位用户的问题
             if (text != null && text.contains("<e type=\"mention\" uid=\"415544512228128\"")){
                 zsxqApi.answer(groupId,cookie,topicId,text,false);
+                // zsxqApi.answer(groupId, cookie, topicId, openAI.doChatGPT(openAiKey, text), false);
+
             }
-
-
-//            zsxqApi.answer(groupId, cookie, topicId, openAI.doChatGPT(openAiKey, text), false);
         }
     }
 
-//    @Test
-//    public void test_openAi() throws IOException {
-//        String response = openAI.doChatGPT(openAiKey, "帮我写一个java冒泡排序");
-//        logger.info("测试结果：{}", response);
-//    }
+    @Test
+    public void test_openAi() throws IOException {
+        String response = openAI.doChatGPT(openAiKey, "帮我写一个java冒泡排序");
+        logger.info("测试结果：{}", response);
+    }
 
 }
