@@ -66,15 +66,16 @@ public class ZsxqApi implements IZsxqApi {
         /* 测试数据
 
          */
-        String paramJson = "{\n" +
-                "  \"req_data\": {\n" +
-                "    \"text\": \"自己去百度！\\n\",\n" +
-                "    \"image_ids\": [],\n" +
-                "    \"silenced\": false\n" +
-                "  }\n" +
-                "}";
-//        AnswerReq answerReq = new AnswerReq(new ReqData(text, silenced));
-//        String paramJson = JSONObject.toJSONString(answerReq);
+//        String paramJson = "{\n" +
+//                "  \"req_data\": {\n" +
+//                "    \"text\": \"自己去百度！\\n\",\n" +
+//                "    \"image_ids\": [],\n" +
+//                "    \"silenced\": false\n" +
+//                "  }\n" +
+//                "}";
+        AnswerReq answerReq = new AnswerReq(new ReqData(text, silenced));
+        String paramJson = JSONObject.toJSONString(answerReq);
+        logger.info("数据" + paramJson);
 
         StringEntity stringEntity = new StringEntity(paramJson, ContentType.create("text/json", "UTF-8"));
         post.setEntity(stringEntity);
